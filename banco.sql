@@ -1,0 +1,7 @@
+CREATE DATABASE recomendaia CHARSET=utf8;
+USE recomendaia;
+
+CREATE TABLE usuario (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(20) NOT NULL
+);
