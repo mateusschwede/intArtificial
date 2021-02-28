@@ -12,16 +12,31 @@
     }
 ?>
 
-<div class="row">
-    <div class="col-sm-12 text-center">
-        <h1>Novo usuário</h1>
-        <form action="addUsuario.php" method="post">
-            <div class="mb-3">
-                <input type="text" class="form-control" maxlength="20" name="nome" required placeholder="nome" style="text-transform: lowercase;">
-            </div>
-            <button type="button" class="btn btn-danger" onclick="window.location.href='index.php'">Voltar</button>
-            <button type="submit" class="btn btn-success">Cadastrar</button>
-        </form>
-        <br>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RecomendaIA</title>
+    <link rel="stylesheet" href="estilo.css">
+    <script type="text/javascript" src="pace.min.js"></script>
+</head>
+<body>
+
+    <div class="row container">
+        <div class="col-sm-12 text-center">
+            <h1>Novo usuário</h1>
+            <h1>TESTE</h1>
+            <form action="addUsuario.php" method="post">
+                <div class="mb-3">
+                    <input type="text" class="form-control" maxlength="20" name="nome" required placeholder="nome" style="text-transform: lowercase;">
+                </div>
+                <button type="button" class="btn btn-danger" onclick="window.location.href='index.php'">Voltar</button>
+                <button type="submit" class="btn btn-success">Cadastrar</button>
+            </form>
+            <br>
+        </div>
     </div>
-</div>
+</body>
+</html>
