@@ -40,7 +40,7 @@
             <?php
                 $r = $db->prepare("SELECT COUNT(idUsuario) FROM usuario_postagem WHERE idUsuario=?");
                 $r->execute(array($_SESSION['id']));
-                if($r->rowCount()==7) {echo "<a href='listarResultados.php' class='btn btn-primary btn-lg'>Listar Resultados</a>";}
+                if($r->rowCount()==0) {echo "<a href='listarResultados.php' class='btn btn-primary btn-lg'>Listar Resultados</a>";}
             ?>
             <br>
 

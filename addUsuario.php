@@ -27,7 +27,6 @@
     <div class="row container">
         <div class="col-sm-12 text-center">
             <h1>Novo usuário</h1>
-            <h1>TESTE</h1>
             <form action="addUsuario.php" method="post">
                 <div class="mb-3">
                     <input type="text" class="form-control" maxlength="20" name="nome" required placeholder="nome" style="text-transform: lowercase;">
