@@ -35,11 +35,36 @@
     <div class="row container">
         <div class="col-sm-12">
             <h1>Lista de posts aqui</h1>
-            <h1>TESTE</h1>
+            <a href="limparDados.php" class="btn btn-warning">Limpar Dados</a>
+            <a href="excluirConta.php" class="btn btn-danger">Excluir Conta</a>
+            <?php
+                $r = $db->prepare("SELECT COUNT(idUsuario) FROM usuario_postagem WHERE idUsuario=?");
+                $r->execute(array($_SESSION['id']));
+                if($r->rowCount()==7) {echo "<a href='listarResultados.php' class='btn btn-primary btn-lg'>Listar Resultados</a>";}
+            ?>
+            <br>
+
+            <?php
+                $r = $db->query("SELECT * FROM postagem");
+                $linhas = $r->fetchAll(PDO::FETCH_ASSOC);
+                foreach($linhas as $l) {
+                    echo "
+                        <br>
+                        <div class='card text-center'>
+                            <div class='card-body'>
+                                <h5 class='card-title'>".$l['titulo']."</h5>
+                                <p class='card-text'>".$l['descricao']."</p>
+                                <a href='curtirPostagem.php' class='btn btn-primary'>Curtir</a>
+                            </div>
+                        </div>
+                    ";
+                }
+            ?>
+
+
         </div>
     </div>
 
 
 </body>
 </html>
-
