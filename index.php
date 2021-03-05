@@ -1,13 +1,17 @@
 <?php
     require_once 'cabecalho.php';
     if(!empty($_POST['nome'])) {
-        $r = $db->prepare("SELECT id FROM usuario WHERE nome=?");
+        $r = $db->prepare("SELECT * FROM usuario WHERE nome=?");
         $r->execute(array($_POST['nome']));
         if($r->rowCount()==0) {echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>Nome não cadastrado!<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";}
         else {
             session_start();
             $linhas = $r->fetchAll(PDO::FETCH_ASSOC);
-            foreach($linhas as $l) {$_SESSION['id'] = $l['id']; header("location: painel.php");}
+            foreach($linhas as $l) {
+                $_SESSION['id'] = $l['id'];
+                $_SESSION['nome'] = $l['nome'];
+                $_SESSION['msg'] = null;
+                header("location: painel.php");}
         }
     }
 ?>
