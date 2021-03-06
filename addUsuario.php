@@ -26,7 +26,9 @@
 
     <div class="row container">
         <div class="col-sm-12 text-center">
-            <h1>Novo usuário</h1>
+            <img src="https://img.icons8.com/color/96/000000/artificial-intelligence.png"/>
+            <h1>RecomendaIA</h1>
+            <h3 class="text-muted">Novo Usuário</h3>
             <form action="addUsuario.php" method="post">
                 <div class="mb-3">
                     <input type="text" class="form-control" maxlength="20" name="nome" required placeholder="nome" style="text-transform: lowercase;">
@@ -37,5 +39,6 @@
             <br>
         </div>
     </div>
+
 </body>
 </html>
