@@ -1,17 +1,47 @@
-#navbar {padding: 0%;}
-#menu {border-radius: 0px 0px 18px 18px;}
-#logout {color: tomato;}
-
-
-/* CENTRALIZAÇÃO DE FORMS */
-* {box-sizing: border-box;}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 92%;
+#navbar {
+  padding: 0%;
+}
+#menu {
+  border-radius: 0px 0px 18px 18px;
+}
+#logout {
+  color: tomato;
 }
 
+
+footer {
+  margin-top: 171px;
+}
+
+footer a {
+  text-decoration: none;
+}
+
+.copy {
+  background-color: #1e88e5;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+
+.copy a {
+  color: white;
+}
+
+.copy a:hover {
+  text-decoration: underline;
+}
+
+/* CENTRALIZAÇÃO DE FORMS */
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 92%;
+}
 
 /* BARRA CARREGAMENTO PADRÃO YOUTUBE */
 .pace {
@@ -22,10 +52,12 @@
   user-select: none;
 }
 
-.pace-inactive {display: none;}
+.pace-inactive {
+  display: none;
+}
 
 .pace .pace-progress {
-  background:#1e88e5;
+  background: #1e88e5;
   position: fixed;
   z-index: 2000;
   top: 0;
