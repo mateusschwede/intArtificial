@@ -36,6 +36,7 @@
                 </div>
                 <button type="button" class="btn btn-danger" onclick="window.location.href='index.php'">Voltar</button>
                 <button type="submit" class="btn btn-success">Cadastrar</button>
+                <button type="reset" class="btn btn-warning">Limpar</button>
             </form>
             <br>
         </div>
