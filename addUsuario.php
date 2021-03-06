@@ -28,6 +28,7 @@
         <div class="col-sm-12 text-center">
             <img src="https://img.icons8.com/color/96/000000/artificial-intelligence.png"/>
             <h1>RecomendaIA</h1>
+            <h4 class="text-muted">Software de recomendações de linguagens de programação</h4>
             <h3 class="text-muted">Novo Usuário</h3>
             <form action="addUsuario.php" method="post">
                 <div class="mb-3">
@@ -42,3 +43,5 @@
 
 </body>
 </html>
+
+<?php require_once 'rodape.php'?>
