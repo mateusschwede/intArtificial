@@ -1,7 +1,4 @@
-<?php
-    require_once 'cabecalho.php';
-    session_start();
-?>
+<?php require_once 'cabecalho.php'; ?>
 <div class="row">
     <div class="col-sm-12" id="navbar">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="menu">
@@ -29,7 +26,11 @@
         <?php
             $r = $db->prepare("SELECT COUNT(idUsuario) FROM usuario_postagem WHERE idUsuario=?");
             $r->execute(array($_SESSION['id']));
-            if($r->rowCount()==1) {echo "<br><br><a href='listarResultados.php' class='btn btn-success btn-lg'><svg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' fill='currentColor' class='bi bi-list-nested' viewBox='0 0 16 16'><path fill-rule='evenodd' d='M4.5 11.5A.5.5 0 0 1 5 11h10a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm-2-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm-2-4A.5.5 0 0 1 1 3h10a.5.5 0 0 1 0 1H1a.5.5 0 0 1-.5-.5z'/></svg> Listar Resultados</a>";}
+            $linhas = $r->fetchAll(PDO::FETCH_ASSOC);
+            foreach($linhas as $l) {
+                $curtidas = $l['COUNT(idUsuario)'];
+                if($curtidas==7) {echo "<br><br><a href='listarResultados.php' class='btn btn-outline-success btn-lg'><svg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' fill='currentColor' class='bi bi-list-nested' viewBox='0 0 16 16'><path fill-rule='evenodd' d='M4.5 11.5A.5.5 0 0 1 5 11h10a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm-2-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm-2-4A.5.5 0 0 1 1 3h10a.5.5 0 0 1 0 1H1a.5.5 0 0 1-.5-.5z'/></svg> Listar Resultados</a>";}
+            }
         ?>
         <br>
     </div>
@@ -45,7 +46,9 @@
                         <div class='card-body'>
                             <h5 class='card-title'>".$l['titulo']."</h5>
                             <p class='card-text'>".$l['descricao']."</p>
-                            <a href='curtirPostagem.php?idPostagem=".$l['id']."' class='btn btn-outline-primary'><svg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' fill='currentColor' class='bi bi-heart' viewBox='0 0 16 16'><path d='M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z'/></svg> Curtir</a>
+                ";
+                            if($curtidas!=7) {echo "<a href='curtirPostagem.php?idPostagem=".$l['id']."' class='btn btn-outline-primary'><svg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' fill='currentColor' class='bi bi-heart' viewBox='0 0 16 16'><path d='M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z'/></svg> Curtir</a>";}
+                echo "
                         </div>
                     </div>
                 ";
@@ -63,7 +66,9 @@
                         <div class='card-body'>
                             <h5 class='card-title'>".$l['titulo']."</h5>
                             <p class='card-text'>".$l['descricao']."</p>
-                            <a href='curtirPostagem.php?idPostagem=".$l['id']."' class='btn btn-outline-primary'><svg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' fill='currentColor' class='bi bi-heart' viewBox='0 0 16 16'><path d='M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z'/></svg> Curtir</a>
+                ";
+                            if($curtidas!=7) {echo "<a href='curtirPostagem.php?idPostagem=".$l['id']."' class='btn btn-outline-primary'><svg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' fill='currentColor' class='bi bi-heart' viewBox='0 0 16 16'><path d='M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z'/></svg> Curtir</a>";}
+                echo "
                         </div>
                     </div>
                 ";
@@ -81,14 +86,13 @@
                         <div class='card-body'>
                             <h5 class='card-title'>".$l['titulo']."</h5>
                             <p class='card-text'>".$l['descricao']."</p>
-                            <a href='curtirPostagem.php?idPostagem=".$l['id']."' class='btn btn-outline-primary'><svg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' fill='currentColor' class='bi bi-heart' viewBox='0 0 16 16'><path d='M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z'/></svg> Curtir</a>
+                ";
+                            if($curtidas!=7) {echo "<a href='curtirPostagem.php?idPostagem=".$l['id']."' class='btn btn-outline-primary'><svg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' fill='currentColor' class='bi bi-heart' viewBox='0 0 16 16'><path d='M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z'/></svg> Curtir</a>";}
+                echo "
                         </div>
                     </div>
                 ";
-
             }
-
-        
         ?>
     </div>
 </div>

@@ -1,7 +1,4 @@
-<?php
-    require_once 'cabecalho.php';
-    session_start();
-?>
+<?php require_once 'cabecalho.php'; ?>
 <div class="row">
     <div class="col-sm-12" id="navbar">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="menu">
@@ -28,12 +25,137 @@
 
 <div class="row">
     <div class="col-sm-6 text-center">
-        <h4>Linguagens de Programação</h4>
+        <h4>Linguagens Mais Sugeridas</h4>
         <ul class='list-group shadow bg-body rounded'>
             <?php
-                //Cálculos Aqui
+                $frontend = 0;
+                $backend = 0;
+                $desktop = 0;
+                $mobile = 0;
+                $web = 0;
+
+                $r = $db->prepare("SELECT * FROM usuario_postagem WHERE idUsuario=?");
+                $r->execute(array($_SESSION['id']));
+                $linhas = $r->fetchAll(PDO::FETCH_ASSOC);
+                foreach($linhas as $l) {
+
+                    $r = $db->prepare("SELECT * FROM postagem WHERE id=?");
+                    $r->execute(array($l['idPostagem']));
+                    $linhas2 = $r->fetchAll(PDO::FETCH_ASSOC);
+                    foreach($linhas2 as $l2) {
+                        if($l2['frontend']==true) {$frontend++;}
+                        if($l2['backend']==true) {$backend++;}
+                        if($l2['desktop']==true) {$desktop++;}
+                        if($l2['mobile']==true) {$mobile++;}
+                        if($l2['web']==true) {$web++;}
+                    }
+
+                }
+                
+                echo "Front: ".$frontend."<br>Back: ".$backend."<br>Desktop: ".$desktop."<br>Mobile: ".$mobile."<br>Web: ".$web."<br>";
+
+                //Se Front ou Back
+                if($frontend>$backend) {$frontBack="frontend";}
+                elseif($frontend<$backend) {$frontBack="backend";}
+                else {$frontBack="fullstack";}
+                
+                echo $frontBack."<br>";
+
+                //Qual Plataforma
+                if( ($desktop>$mobile) and ($desktop>$web) ) {$plataforma = "desktop";}
+                if( ($web>$desktop) and ($web>$mobile) ) {$plataforma = "web";}
+                if( ($mobile>$desktop) and ($mobile>$web) ) {$plataforma = "mobile";}
+                echo $plataforma."<br>";
+
+                //Listar linguagens
+                $listaLinguagens = [];
+
+                if( ($frontBack=="fullstack") and ($plataforma=="desktop") ) {
+                    $r = $db->query("SELECT nome FROM linguagem WHERE frontend=1 AND backend=1 AND desktop=1");
+                    $linhas = $r->fetchAll(PDO::FETCH_ASSOC);
+                    foreach($linhas as $l) {
+                        $listaLinguagens[] = $l['nome'];                        
+                    }
+                }
+
+                if( ($frontBack=="fullstack") and ($plataforma=="web") ) {
+                    $r = $db->query("SELECT nome FROM linguagem WHERE frontend=1 AND backend=1 AND web=1");
+                    $linhas = $r->fetchAll(PDO::FETCH_ASSOC);
+                    foreach($linhas as $l) {
+                        $listaLinguagens[] = $l['nome'];
+                    }
+                }
+
+                if( ($frontBack=="fullstack") and ($plataforma=="mobile") ) {
+                    $r = $db->query("SELECT nome FROM linguagem WHERE frontend=1 AND backend=1 AND mobile=1");
+                    $linhas = $r->fetchAll(PDO::FETCH_ASSOC);
+                    foreach($linhas as $l) {
+                        $listaLinguagens[] = $l['nome'];
+                    }
+                }
+
+                if( ($frontBack=="frontend") and ($plataforma=="desktop") ) {
+                    $r = $db->query("SELECT nome FROM linguagem WHERE frontend=1 AND desktop=1");
+                    $linhas = $r->fetchAll(PDO::FETCH_ASSOC);
+                    foreach($linhas as $l) {
+                        $listaLinguagens[] = $l['nome'];
+                    }
+                }
+
+                if( ($frontBack=="frontend") and ($plataforma=="web") ) {
+                    $r = $db->query("SELECT nome FROM linguagem WHERE frontend=1 AND web=1");
+                    $linhas = $r->fetchAll(PDO::FETCH_ASSOC);
+                    foreach($linhas as $l) {
+                        $listaLinguagens[] = $l['nome'];
+                    }
+                }
+
+                if( ($frontBack=="frontend") and ($plataforma=="mobile") ) {
+                    $r = $db->query("SELECT nome FROM linguagem WHERE frontend=1 AND mobile=1");
+                    $linhas = $r->fetchAll(PDO::FETCH_ASSOC);
+                    foreach($linhas as $l) {
+                        $listaLinguagens[] = $l['nome'];
+                    }
+                }
+
+                if( ($frontBack=="backend") and ($plataforma=="desktop") ) {
+                    $r = $db->query("SELECT nome FROM linguagem WHERE backend=1 AND desktop=1");
+                    $linhas = $r->fetchAll(PDO::FETCH_ASSOC);
+                    foreach($linhas as $l) {
+                        $listaLinguagens[] = $l['nome'];
+                    }
+                }
+
+                if( ($frontBack=="backend") and ($plataforma=="web") ) {
+                    $r = $db->query("SELECT nome FROM linguagem WHERE backend=1 AND web=1");
+                    $linhas = $r->fetchAll(PDO::FETCH_ASSOC);
+                    foreach($linhas as $l) {
+                        $listaLinguagens[] = $l['nome'];
+                    }
+                }
+
+                if( ($frontBack=="backend") and ($plataforma=="mobile") ) {
+                    $r = $db->query("SELECT nome FROM linguagem WHERE backend=1 AND mobile=1");
+                    $linhas = $r->fetchAll(PDO::FETCH_ASSOC);
+                    foreach($linhas as $l) {
+                        $listaLinguagens[] = $l['nome'];
+                    }
+                }
+            
+                if(count($listaLinguagens)>5) {
+                    $c = 0;
+                    array_rand($listaLinguagens);
+                    foreach($listaLinguagens as $li) {
+                        if($c==5) {break;}
+                        else {$c++;}
+                        echo "<li class='list-group-item'>$li</li>";
+                    }
+                } else {
+                    foreach($listaLinguagens as $li) {
+                        echo "<li class='list-group-item'>$li</li>";
+                    }
+                }
             ?>
-            <li class='list-group-item'>nomeLinguagem <span class='badge bg-primary rounded-pill'>Nº pontos</span></li>
         </ul>
     </div>
 

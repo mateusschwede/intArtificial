@@ -41,11 +41,5 @@
         <br>
         <a href="addUsuario.php" class="btn btn-secondary">Cadastrar-se</a>
     </div>
-    
-</div>
-</body>
-</html>
-
-
 
 <?php require_once 'rodape.php'?>
