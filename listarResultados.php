@@ -58,7 +58,6 @@
                 if($frontend>$backend) {$frontBack="frontend";}
                 elseif($frontend<$backend) {$frontBack="backend";}
                 else {$frontBack="fullstack";}
-                
                 echo $frontBack."<br>";
 
                 //Qual Plataforma
@@ -74,7 +73,7 @@
                     $r = $db->query("SELECT nome FROM linguagem WHERE frontend=1 AND backend=1 AND desktop=1");
                     $linhas = $r->fetchAll(PDO::FETCH_ASSOC);
                     foreach($linhas as $l) {
-                        $listaLinguagens[] = $l['nome'];                        
+                        $listaLinguagens[] = $l['nome'];
                     }
                 }
 
@@ -148,11 +147,19 @@
                     foreach($listaLinguagens as $li) {
                         if($c==5) {break;}
                         else {$c++;}
-                        echo "<li class='list-group-item'>$li</li>";
+                        $r = $db->prepare("SELECT descricao FROM linguagem WHERE nome=?");
+                        $r->execute(array($li));
+                        $linhas = $r->fetchAll(PDO::FETCH_ASSOC);
+                        foreach($linhas as $l) {$descricao = $l['descricao'];}
+                        echo "<li class='list-group-item'><b>$li</b><br>$descricao</li>";
                     }
                 } else {
                     foreach($listaLinguagens as $li) {
-                        echo "<li class='list-group-item'>$li</li>";
+                        $r = $db->prepare("SELECT descricao FROM linguagem WHERE nome=?");
+                        $r->execute(array($li));
+                        $linhas = $r->fetchAll(PDO::FETCH_ASSOC);
+                        foreach($linhas as $l) {$descricao = $l['descricao'];}
+                        echo "<li class='list-group-item'><b>$li</b><br>$descricao</li>";
                     }
                 }
             ?>

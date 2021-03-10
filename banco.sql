@@ -9,6 +9,7 @@ CREATE TABLE usuario (
 CREATE TABLE linguagem (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(30) NOT NULL,
+    descricao VARCHAR(1000) NOT NULL,
     frontend BOOLEAN NOT NULL,
     backend BOOLEAN NOT NULL,
     desktop BOOLEAN NOT NULL,
@@ -40,20 +41,20 @@ CREATE TABLE usuario_postagem (
     idPostagem INT NOT NULL
 );
 
-INSERT INTO linguagem (nome,frontend,backend,desktop,mobile,web) VALUES
-("php",0,1,0,0,1),
-("python",0,1,1,0,0),
-("java",1,1,1,1,0),
-("delphi",1,1,1,1,1),
-("c#",0,1,1,0,0),
-("kotlin",0,1,0,1,0),
-("swift",1,1,1,1,0),
-("cobol",0,1,1,0,0),
-("javascript",1,0,0,0,1),
-("ruby",0,1,1,0,0),
-("go",0,1,1,0,0),
-("assembly",0,1,1,0,0),
-("r",0,1,1,0,0);
+INSERT INTO linguagem (nome,descricao,frontend,backend,desktop,mobile,web) VALUES
+("php","linguagem backend, com foco web, muito utilizada para desenvolvimento de sistemas web",0,1,0,0,1),
+("python","linguagem backend, com desktop e mobile, muito famosa por sua sintaxe simplificada",0,1,1,0,0),
+("java","linguagem backend, com foco desktop e mobile, utilizada na maioria dos dispositivos eletrônicos existentes",1,1,1,1,0),
+("delphi","linguagem fullstack, multi plataforma, com desenvolvimento rad e suporte à inúmeros plugins",1,1,1,1,1),
+("c#","linguagem backend, com foco desktop, muito utilizada para softwares microsoft nos dias atuais",0,1,1,0,0),
+("kotlin","linguagem backend, com foco mobile, altamente recomendada à desenvolvimento android, por se tornar mais otimizada que as demais no segmento",0,1,0,1,0),
+("swift","linguagem fullstack, multi plataforma, utilizada pela apple nos seus projetos atuais",1,1,1,1,0),
+("cobol","linguagem backend, com foco desktop, cujo cunho, antigo, objetiva o hardware específico e baixo nível",0,1,1,0,0),
+("javascript","linguagem frontend, com foco web, que mais cresce no mundo, por sua sintaxe alternativa e simples",1,0,0,0,1),
+("ruby","linguagem backend, com foco desktop, com sintaxe simples e amigável, priorizando desenpenho no desenvolvimento",0,1,1,0,0),
+("go","linguagem backend, com foco mobile, utilizada pela google para desenvolvimento nos seus projetos atuais e aprendizado",0,1,1,0,0),
+("assembly","linguagem backend, com foco desktop, com sintaxe complexa, muito usada para código de máquina específica desktop",0,1,1,0,0),
+("r","linguagem backend, com foco desktop, muito utilizada para desenvolvimento de projetos envolvendo estatísticas e dados relacionáveis",0,1,1,0,0);
 
 INSERT INTO postagem(titulo,descricao,frontend,backend,desktop,mobile,web) VALUES
 ("Soluções em Cloud: Novidades no visual","Uma nova era está sendo desenvolvida com relação ao visual dos novos softwares desenvolvidos na núvem. Trata-se de técnicas específicas de UX Design contemporâneo, envolvendo heurísticas de Nielsen e outros pontos de extrema importância para o mundo web",1,0,0,0,1),
