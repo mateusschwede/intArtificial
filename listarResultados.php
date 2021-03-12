@@ -147,18 +147,28 @@
                     foreach($listaLinguagens as $li) {
                         if($c==5) {break;}
                         else {$c++;}
-                        $r = $db->prepare("SELECT descricao FROM linguagem WHERE nome=?");
+                        $r = $db->prepare("SELECT * FROM linguagem WHERE nome=?");
                         $r->execute(array($li));
                         $linhas = $r->fetchAll(PDO::FETCH_ASSOC);
-                        foreach($linhas as $l) {$descricao = $l['descricao'];}
+                        foreach($linhas as $l) {
+                            $descricao = $l['descricao'];
+                            $popularidade = $l['popularidade'];
+                        }
+                        $r = $db->prepare("UPDATE linguagem SET popularidade=? WHERE nome=?");
+                        $r->execute(array($popularidade+1,$li));
                         echo "<li class='list-group-item'><b>$li</b><br>$descricao</li>";
                     }
                 } else {
                     foreach($listaLinguagens as $li) {
-                        $r = $db->prepare("SELECT descricao FROM linguagem WHERE nome=?");
+                        $r = $db->prepare("SELECT * FROM linguagem WHERE nome=?");
                         $r->execute(array($li));
                         $linhas = $r->fetchAll(PDO::FETCH_ASSOC);
-                        foreach($linhas as $l) {$descricao = $l['descricao'];}
+                        foreach($linhas as $l) {
+                            $descricao = $l['descricao'];
+                            $popularidade = $l['popularidade'];
+                        }
+                        $r = $db->prepare("UPDATE linguagem SET popularidade=? WHERE nome=?");
+                        $r->execute(array(($popularidade+1),$li));
                         echo "<li class='list-group-item'><b>$li</b><br>$descricao</li>";
                     }
                 }
@@ -171,9 +181,14 @@
         <ul class='list-group shadow bg-body rounded'>
             <?php
                 //Cálculos Aqui
+                $r = $db->query("SELECT nome,popularidade FROM linguagem ORDER BY popularidade DESC LIMIT 5");
+                $linhas = $r->fetchAll(PDO::FETCH_ASSOC);
+                foreach($linhas as $l) {
+                    if($l['popularidade']>0) {echo "<li class='list-group-item'>".$l['nome']." <span class='badge bg-primary rounded-pill'>".$l['popularidade']." ponto(s)</span></li>";}
+                }
             ?>
-            <li class='list-group-item'>nomeLinguagem <span class='badge bg-primary rounded-pill'>Nº pontos</span></li>
         </ul>
+        <br><a href="limparPopularidade.php" class="btn btn-warning"><svg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' fill='currentColor' class='bi bi-dash-circle' viewBox='0 0 16 16'><path d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z'/><path d='M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z'/></svg> Limpar Dados</a>
     </div>
 </div>
 
