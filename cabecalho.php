@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="estilo.css">
     <script src="pace.min.js"></script>
+    <script src="script.js"></script>
 </head>
 <body>
 <div class="container-fluid">
