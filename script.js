@@ -1,16 +1,19 @@
-function salva(nume) {
-    
-}
-function pinta(num) {
+
+function reg(num) {
     if (document.getElementById(num).style.color=="blue") {
         document.getElementById(num).style.color="black";
+        for( var i = 0; i < cards.length; i++){ 
+            if ( cards[i] == num) {  cards.splice(i, 1);  }
+    }
     }
     else{
-        document.getElementById(num).style.color="blue";
+        if (cards.length<7) {
+            document.getElementById(num).style.color="blue";
+            cards.push(num);
+        }
+        else{
+            confirm("Você pode escolher apenas 7 cards")
+        }
     }  
 }
-function reg(numero) {
-    pinta(numero);
-    salva(numero);
-    
-}
+var cards = [];
