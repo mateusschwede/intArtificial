@@ -16,7 +16,7 @@ function reg(num) {
                 for (let v = 1; v < cards.length; v++) {
                    url = url+"a"+cards[v];   
                 }
-            document.getElementById("enviar").setAttribute("href", "curtirPostagem.php?cards="+ url);
+            document.getElementById("enviar").setAttribute("href", "curtirPostagem.php?cardes="+ url);
             }
         }
         else{
