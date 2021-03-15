@@ -2,7 +2,7 @@
  require_once 'conexao.php';
 
   if(!empty($_GET['cards'])) {
-    $cards = explode('.', $_GET['cards'], -1);
+    $cards = explode('a', $_GET['cards'], -1);
     foreach ($cards as $key => $value) {
 
       $r = $db->prepare("SELECT idPostagem FROM usuario_postagem WHERE idPostagem=? AND idUsuario=?");
