@@ -45,6 +45,8 @@ INSERT INTO linguagem (nome,descricao,frontend,backend,desktop,mobile,web) VALUE
 ("php","linguagem backend, com foco web, muito utilizada para desenvolvimento de sistemas web",0,1,0,0,1),
 ("python","linguagem backend, com desktop e mobile, muito famosa por sua sintaxe simplificada",0,1,1,0,0),
 ("java","linguagem backend, com foco desktop e mobile, utilizada na maioria dos dispositivos eletrônicos existentes",0,1,1,1,0),
+("delphi","linguagem fullstack, utilizada na maioria dos dispositivos eletrônicos existentes",1,1,1,1,0),
+("swift","linguagem fullstack, utilizada pela Apple, para desenvolvimento em inúmeros dispositivos da marca",1,1,1,1,0),
 ("c#","linguagem backend, com foco desktop, muito utilizada para softwares microsoft nos dias atuais",0,1,1,0,0),
 ("kotlin","linguagem backend, com foco mobile, altamente recomendada à desenvolvimento android, por se tornar mais otimizada que as demais no segmento",0,1,0,1,0),
 ("cobol","linguagem backend, com foco desktop, cujo cunho, antigo, objetiva o hardware específico e baixo nível",0,1,1,0,0),

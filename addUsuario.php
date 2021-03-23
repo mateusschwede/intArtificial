@@ -31,8 +31,9 @@
             <h4 class="text-muted">Software de recomendações de linguagens de programação</h4>
             <h3 class="text-muted">Novo Usuário</h3>
             <form action="addUsuario.php" method="post">
-                <div class="mb-3">
-                    <input type="text" class="form-control" maxlength="20" name="nome" required placeholder="nome" style="text-transform: lowercase;">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInput" maxlength="20" name="nome" required placeholder="nome" style="text-transform: lowercase;">
+                    <label for="floatingInput">Nome</label>
                 </div>
                 <button type="button" class="btn btn-danger" onclick="window.location.href='index.php'">Voltar</button>
                 <button type="submit" class="btn btn-success">Cadastrar</button>

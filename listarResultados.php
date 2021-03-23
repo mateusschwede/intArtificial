@@ -1,20 +1,4 @@
-<?php require_once 'cabecalho.php'; ?>
-<div class="row">
-    <div class="col-sm-12" id="navbar">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="menu">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="painel.php"><img src="https://img.icons8.com/color/24/000000/artificial-intelligence.png"/> RecomendaIA</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="painel.php">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="logout.php" id="logout"><?=$_SESSION['nome']?>-logout</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
-</div>
+<?php require_once 'cabecalhoLogado.php'?>
 
 <div class="row">
     <div class="col-sm-12 text-center">
@@ -135,7 +119,7 @@
                 }
 
                 if( ($frontBack=="frontend") and ($plataforma=="desktop") ) {
-                    $r = $db->query("SELECT nome FROM linguagem WHERE frontend=1 AND desktop=1");
+                    $r = $db->query("SELECT nome FROM linguagem WHERE frontend=1 AND backend=0 AND desktop=1");
                     $linhas = $r->fetchAll(PDO::FETCH_ASSOC);
                     foreach($linhas as $l) {
                         $listaLinguagens[] = $l['nome'];
@@ -143,7 +127,7 @@
                 }
 
                 if( ($frontBack=="frontend") and ($plataforma=="web") ) {
-                    $r = $db->query("SELECT nome FROM linguagem WHERE frontend=1 AND web=1");
+                    $r = $db->query("SELECT nome FROM linguagem WHERE frontend=1 AND backend=0 AND web=1");
                     $linhas = $r->fetchAll(PDO::FETCH_ASSOC);
                     foreach($linhas as $l) {
                         $listaLinguagens[] = $l['nome'];
@@ -151,7 +135,7 @@
                 }
 
                 if( ($frontBack=="frontend") and ($plataforma=="mobile") ) {
-                    $r = $db->query("SELECT nome FROM linguagem WHERE frontend=1 AND mobile=1");
+                    $r = $db->query("SELECT nome FROM linguagem WHERE frontend=1 AND backend=0 AND mobile=1");
                     $linhas = $r->fetchAll(PDO::FETCH_ASSOC);
                     foreach($linhas as $l) {
                         $listaLinguagens[] = $l['nome'];
@@ -159,7 +143,7 @@
                 }
 
                 if( ($frontBack=="backend") and ($plataforma=="desktop") ) {
-                    $r = $db->query("SELECT nome FROM linguagem WHERE backend=1 AND desktop=1");
+                    $r = $db->query("SELECT nome FROM linguagem WHERE backend=1 AND frontend=0 AND desktop=1");
                     $linhas = $r->fetchAll(PDO::FETCH_ASSOC);
                     foreach($linhas as $l) {
                         $listaLinguagens[] = $l['nome'];
@@ -167,7 +151,7 @@
                 }
 
                 if( ($frontBack=="backend") and ($plataforma=="web") ) {
-                    $r = $db->query("SELECT nome FROM linguagem WHERE backend=1 AND web=1");
+                    $r = $db->query("SELECT nome FROM linguagem WHERE backend=1 AND frontend=0 AND web=1");
                     $linhas = $r->fetchAll(PDO::FETCH_ASSOC);
                     foreach($linhas as $l) {
                         $listaLinguagens[] = $l['nome'];
@@ -175,7 +159,7 @@
                 }
 
                 if( ($frontBack=="backend") and ($plataforma=="mobile") ) {
-                    $r = $db->query("SELECT nome FROM linguagem WHERE backend=1 AND mobile=1");
+                    $r = $db->query("SELECT nome FROM linguagem WHERE backend=1 AND frontend=0 AND mobile=1");
                     $linhas = $r->fetchAll(PDO::FETCH_ASSOC);
                     foreach($linhas as $l) {
                         $listaLinguagens[] = $l['nome'];
@@ -256,7 +240,7 @@
             </div>
 
         </ul>
-        <br><a href="limparPopularidade.php" class="btn btn-warning"><svg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' fill='currentColor' class='bi bi-dash-circle' viewBox='0 0 16 16'><path d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z'/><path d='M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z'/></svg> Limpar Dados Gerais</a>
+        <br><a href="limparPopularidade.php" class="btn btn-warning" onclick="return confirm('Deseja mesmo limpar o historico do sistema?');"><svg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' fill='currentColor' class='bi bi-dash-circle' viewBox='0 0 16 16'><path d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z'/><path d='M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z'/></svg> Limpar Dados Gerais</a>
     </div>
 </div>
 

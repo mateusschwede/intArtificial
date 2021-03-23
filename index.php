@@ -33,13 +33,15 @@
         <h1>RecomendaIA</h1>
         <h4 class="text-muted">Software de recomendações de linguagens de programação</h4>
         <form action="index.php" method="post">
-            <div class="mb-3">
-                <input type="text" class="form-control" maxlength="20" name="nome" required placeholder="nome" style="text-transform: lowercase;">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="nome" maxlength="20" name="nome" required style="text-transform: lowercase;">
+                <label for="floatingInput">Nome</label>
             </div>
             <button type="submit" class="btn btn-primary btn-lg">Entrar</button>
         </form>
         <br>
         <a href="addUsuario.php" class="btn btn-secondary">Cadastrar-se</a>
     </div>
+</div>
 
 <?php require_once 'rodape.php'?>
