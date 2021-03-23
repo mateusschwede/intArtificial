@@ -25,7 +25,8 @@
 
 <div class="row">
     <div class="col-sm-6 text-center">
-        <h4>Linguagens Mais Sugeridas</h4>
+        <h4>Linguagens mais sugeridas à você</h4>
+        <p class="text-muted">Confira abaixo as linguagens de programação mais recomendadas pelo sistema à você, de acordo com suas curtidas</p>
         <ul class='list-group shadow bg-body rounded'>
             <?php
                 $frontend = 0;
@@ -33,12 +34,14 @@
                 $desktop = 0;
                 $mobile = 0;
                 $web = 0;
+                $plataforma = null;
 
                 $r = $db->prepare("SELECT * FROM usuario_postagem WHERE idUsuario=?");
                 $r->execute(array($_SESSION['id']));
                 $linhas = $r->fetchAll(PDO::FETCH_ASSOC);
                 foreach($linhas as $l) {
 
+                    //Soma pontuação das características das postagens, com relação às características das linguagens
                     $r = $db->prepare("SELECT * FROM postagem WHERE id=?");
                     $r->execute(array($l['idPostagem']));
                     $linhas2 = $r->fetchAll(PDO::FETCH_ASSOC);
@@ -51,22 +54,60 @@
                     }
 
                 }
-                
-                echo "Front: ".$frontend."<br>Back: ".$backend."<br>Desktop: ".$desktop."<br>Mobile: ".$mobile."<br>Web: ".$web."<br>";
+                ?>
 
-                //Se Front ou Back
+                <div class="container">
+                    <!--Gráfico de Ambientes-->
+                    <script type="text/javascript">
+                        google.charts.load("current", {packages:["corechart"]});
+                        google.charts.setOnLoadCallback(drawChart);
+                        function drawChart() {
+                            var data = google.visualization.arrayToDataTable([
+                                ['Ambiente', 'Pontuação'],
+                                ['Frontend', <?=(int)$frontend?>],
+                                ['Backend', <?=(int)$backend?>]
+                            ]);
+                            var options = {title: 'Ambiente',pieHole: 0.4};
+                            var chart = new google.visualization.PieChart(document.getElementById('donutchart1'));
+                            chart.draw(data, options);
+                        }
+                    </script>
+                    <div id="donutchart1" style="width: 600px; height: 400px;"></div>
+
+                    <!--Gráfico de Plataformas-->
+                    <script type="text/javascript">
+                        google.charts.load("current", {packages:["corechart"]});
+                        google.charts.setOnLoadCallback(drawChart);
+                        function drawChart() {
+                            var data = google.visualization.arrayToDataTable([
+                                ['Plataforma', 'Pontuação'],
+                                ['Desktop', <?=(int)$desktop?>],
+                                ['Mobile', <?=(int)$mobile?>],
+                                ['Web', <?=(int)$web?>]
+                            ]);
+                            var options = {title: 'Plataforma',pieHole: 0.4};
+                            var chart = new google.visualization.PieChart(document.getElementById('donutchart2'));
+                            chart.draw(data, options);
+                        }
+                    </script>
+                    <div id="donutchart2" style="width: 600px; height: 400px;"></div>
+                </div>
+
+                <?php
+                //Qual ambiente: Se Front ou Back ou Ambos
                 if($frontend>$backend) {$frontBack="frontend";}
                 elseif($frontend<$backend) {$frontBack="backend";}
                 else {$frontBack="fullstack";}
-                echo $frontBack."<br>";
 
-                //Qual Plataforma
+                //Qual Plataforma: Se Desktop ou Mobile ou Web
                 if( ($desktop>$mobile) and ($desktop>$web) ) {$plataforma = "desktop";}
                 if( ($web>$desktop) and ($web>$mobile) ) {$plataforma = "web";}
                 if( ($mobile>$desktop) and ($mobile>$web) ) {$plataforma = "mobile";}
-                echo $plataforma."<br>";
 
-                //Listar linguagens
+                echo "<br><p><b>Ambiente(s) mais recomendado(s):</b> ".$frontBack."</p>";
+                echo "<p><b>Plataforma(s) mais recomendada(s):</b> ".$plataforma."</p>";
+
+                //Listar linguagens, de acordo com características somadas
                 $listaLinguagens = [];
 
                 if( ($frontBack=="fullstack") and ($plataforma=="desktop") ) {
@@ -141,6 +182,7 @@
                     }
                 }
             
+                //Mostrar listagem de linguagens mais sugeridas à você, de acordo com somatório de características(Ambiente e Plataforma)
                 if(count($listaLinguagens)>5) {
                     $c = 0;
                     array_rand($listaLinguagens);
@@ -177,18 +219,44 @@
     </div>
 
     <div class="col-sm-6 text-center">
-        <h4>Linguagens Mais Recomendadas</h4>
+        <h4>Top 5 linguagens</h4>
+        <p class="text-muted">Confira abaixo as 5 linguagens de programação mais recomendadas aos usuários do sistema, de acordo com suas curtidas</p>
         <ul class='list-group shadow bg-body rounded'>
             <?php
-                //Cálculos Aqui
+                //Mostrar listagem de linguagens top 5, de acordo com maior pontuação geral
                 $r = $db->query("SELECT nome,popularidade FROM linguagem ORDER BY popularidade DESC LIMIT 5");
                 $linhas = $r->fetchAll(PDO::FETCH_ASSOC);
                 foreach($linhas as $l) {
                     if($l['popularidade']>0) {echo "<li class='list-group-item'>".$l['nome']." <span class='badge bg-primary rounded-pill'>".$l['popularidade']." ponto(s)</span></li>";}
                 }
             ?>
+
+            <!--Gráfico de Linguagens-->
+            <div class="container">
+                <script type="text/javascript">
+                    google.charts.load("current", {packages:["corechart"]});
+                    google.charts.setOnLoadCallback(drawChart);
+                    function drawChart() {
+                        var data = google.visualization.arrayToDataTable([
+                            ['Linguagem', 'Pontuação'],
+                            <?php
+                                $r = $db->query("SELECT nome,popularidade FROM linguagem");
+                                $linhas = $r->fetchAll(PDO::FETCH_ASSOC);
+                                foreach($linhas as $l) {
+                                echo "['".$l['nome']."', ".$l['popularidade']."],";
+                            }
+                            ?>
+                        ]);
+                        var options = {title: 'Linguagens',pieHole: 0.4};
+                        var chart = new google.visualization.PieChart(document.getElementById('donutchart3'));
+                        chart.draw(data, options);
+                    }
+                </script>
+                <div id="donutchart3" style="width: 600px; height: 400px;"></div>
+            </div>
+
         </ul>
-        <br><a href="limparPopularidade.php" class="btn btn-warning"><svg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' fill='currentColor' class='bi bi-dash-circle' viewBox='0 0 16 16'><path d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z'/><path d='M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z'/></svg> Limpar Dados</a>
+        <br><a href="limparPopularidade.php" class="btn btn-warning"><svg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' fill='currentColor' class='bi bi-dash-circle' viewBox='0 0 16 16'><path d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z'/><path d='M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z'/></svg> Limpar Dados Gerais</a>
     </div>
 </div>
 

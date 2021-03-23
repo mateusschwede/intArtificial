@@ -16,5 +16,5 @@
     }
 
   }
-
-?><a href=" listarResultados.php">listar</a>
+  header("location: listarResultados.php");
+?>
