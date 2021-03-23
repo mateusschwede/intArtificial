@@ -46,13 +46,13 @@
                         google.charts.load("current", {packages:["corechart"]});
                         google.charts.setOnLoadCallback(drawChart);
                         function drawChart() {
-                            var data = google.visualization.arrayToDataTable([
+                            let data = google.visualization.arrayToDataTable([
                                 ['Ambiente', 'Pontuação'],
                                 ['Frontend', <?=(int)$frontend?>],
                                 ['Backend', <?=(int)$backend?>]
                             ]);
-                            var options = {title: 'Ambiente',pieHole: 0.4};
-                            var chart = new google.visualization.PieChart(document.getElementById('donutchart1'));
+                            let options = {title: 'Ambiente',pieHole: 0.4};
+                            let chart = new google.visualization.PieChart(document.getElementById('donutchart1'));
                             chart.draw(data, options);
                         }
                     </script>
@@ -63,14 +63,14 @@
                         google.charts.load("current", {packages:["corechart"]});
                         google.charts.setOnLoadCallback(drawChart);
                         function drawChart() {
-                            var data = google.visualization.arrayToDataTable([
+                            let data = google.visualization.arrayToDataTable([
                                 ['Plataforma', 'Pontuação'],
                                 ['Desktop', <?=(int)$desktop?>],
                                 ['Mobile', <?=(int)$mobile?>],
                                 ['Web', <?=(int)$web?>]
                             ]);
-                            var options = {title: 'Plataforma',pieHole: 0.4};
-                            var chart = new google.visualization.PieChart(document.getElementById('donutchart2'));
+                            let options = {title: 'Plataforma',pieHole: 0.4};
+                            let chart = new google.visualization.PieChart(document.getElementById('donutchart2'));
                             chart.draw(data, options);
                         }
                     </script>
@@ -221,18 +221,18 @@
                     google.charts.load("current", {packages:["corechart"]});
                     google.charts.setOnLoadCallback(drawChart);
                     function drawChart() {
-                        var data = google.visualization.arrayToDataTable([
+                        let data = google.visualization.arrayToDataTable([
                             ['Linguagem', 'Pontuação'],
                             <?php
                                 $r = $db->query("SELECT nome,popularidade FROM linguagem");
                                 $linhas = $r->fetchAll(PDO::FETCH_ASSOC);
                                 foreach($linhas as $l) {
-                                echo "['".$l['nome']."', ".$l['popularidade']."],";
-                            }
+                                    echo "['".$l['nome']."', ".$l['popularidade']."],";
+                                }
                             ?>
                         ]);
-                        var options = {title: 'Linguagens',pieHole: 0.4};
-                        var chart = new google.visualization.PieChart(document.getElementById('donutchart3'));
+                        let options = {title: 'Linguagens',pieHole: 0.4};
+                        let chart = new google.visualization.PieChart(document.getElementById('donutchart3'));
                         chart.draw(data, options);
                     }
                 </script>
